@@ -14,10 +14,9 @@ class Program
     static void Main()
     {
         // Get the list of characters FileManager.cs
-        //var characters = new Character();
-        //characters.ReadCharactersToList();
-        IFileHandler characters = new JsonFileHandler;
-        CharacterReader.ReadToList(characters);
+        IFileHandler characters = new CsvFileHandler();
+        //CharacterReader.ReadToList(characters);
+        characters.ReadToList();
 
         // Display the menu and prompt the user to enter an option
         DisplayMenu();
@@ -26,19 +25,19 @@ class Program
 
         if (userInput == "1") // list the pre-existing characters
         {
-            CharacterReader.PrintList(characters);
+            characters.PrintList();
         }
         else if (userInput == "2") // Add a character to the list
         {
-            CharacterWriter.NewCharacter(characters); // call a class that adds a new character to the list
+            characters.NewCharacter(); // call a class that adds a new character to the list
         }
         else if (userInput == "3") // Update an existing character
         {
-            CharacterWriter.UpdateCharacter(characters);
+            characters.UpdateCharacter();
         }
         else if (userInput == "4") // Find a specific character
         {
-            CharacterReader.FindCharacter(characters);
+            characters.FindCharacter();
         }
         else // if the user enters something other than 1, 2, or 3, then the program quits
         {

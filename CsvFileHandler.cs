@@ -6,7 +6,7 @@
         {
             FileName = "Files/input.csv";
         }
-        public void ReadToList(List<Character> characters) // reads from input.csv
+        public void ReadToList() // reads from input.csv
         {
             using (StreamReader reader = new StreamReader("Files/input.csv"))
             {
@@ -47,16 +47,16 @@
                     character.hp = cols[3];
                     character.equipment = cols[4];
 
-                    characters.Add(character);
+                    Characters.Add(character);
 
                     line = reader.ReadLine();
                 }
             }
         }
 
-        public void PrintList(List<Character> characters) // read all character from the list
+        public void PrintList() // read all character from the list
         {
-            foreach (var c in characters)
+            foreach (var c in Characters)
             {
                 Console.WriteLine($"\nCharacter Name: {c.name}");
                 Console.WriteLine($"Character Class: {c.charClass}");
@@ -73,14 +73,14 @@
             }
         }
 
-        public void FindCharacter(List<Character> characters) // find a specific character based on entering a name
+        public void FindCharacter() // find a specific character based on entering a name
         {
             string userInput = null;
 
             Console.Write("\nType in the name of the character you wish to see> ");
             userInput = Console.ReadLine();
 
-            var selectedChar = characters.FirstOrDefault(c => c.name == userInput);
+            var selectedChar = Characters.FirstOrDefault(c => c.name == userInput);
 
             if (selectedChar != null)
             {
@@ -100,7 +100,7 @@
             }
         }
 
-        public void NewCharacter(List<Character> characters) // writes a new character to the list
+        public void NewCharacter() // writes a new character to the list
         {
             var newChar = new Character(); // initilization of new character
 
@@ -119,18 +119,18 @@
             Console.Write("Enter your character's equipment (separate items with a '|'): "); // give character a equipment
             newChar.equipment = Console.ReadLine();
 
-            characters.Add(newChar); // add the new character to the character list
+            Characters.Add(newChar); // add the new character to the character list
 
-            SaveToFile(characters);
+            SaveToFile();
         }
 
-        public void UpdateCharacter(List<Character> characters)
+        public void UpdateCharacter()
         {
             string userInput = null;
 
             Console.WriteLine("\nList of Characters: ");
 
-            foreach (var c in characters) // foreach loop lists the names of all the characters
+            foreach (var c in Characters) // foreach loop lists the names of all the characters
             {
                 Console.WriteLine($"\t{c.name}");
             }
@@ -138,7 +138,7 @@
             Console.Write("\nType in the name of the character you want to update> "); // user selects which character they want to update
             userInput = Console.ReadLine();
 
-            var selectedChar = characters.FirstOrDefault(c => c.name == userInput);
+            var selectedChar = Characters.FirstOrDefault(c => c.name == userInput);
 
             int updatedLvl = int.Parse(selectedChar.lvl) + 1; // store updated numbers in new variables
             int updatedHp = int.Parse(selectedChar.hp) + 6;
@@ -146,12 +146,10 @@
             selectedChar.lvl = updatedLvl.ToString(); // take variables and convert them to strings to place in character
             selectedChar.hp = updatedHp.ToString();
 
-            SaveToFile(characters); // calls a class that saves changes to input.csv
-
-            //return characters;
+            SaveToFile(); // calls a class that saves changes to input.csv
         }
 
-        public void SaveToFile(List<Character> characters) // Saves all the charcaters in the list to input.csv
+        public void SaveToFile() // Saves all the charcaters in the list to input.csv
         {
             File.WriteAllText("Files\\input.csv", string.Empty); // delete all data in the file so it can be rewriten
 
@@ -159,7 +157,7 @@
             {
                 writer.WriteLine("Name,Class,Level,HP,Equipment"); // write the header in first
 
-                foreach (var c in characters)
+                foreach (var c in Characters)
                 {
                     writer.WriteLine($"{c.name},{c.charClass},{c.lvl},{c.hp},{c.equipment}"); // then write in all characters
                 }

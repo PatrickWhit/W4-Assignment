@@ -1,32 +1,34 @@
-﻿namespace W1_assignment_template
+﻿using Newtonsoft.Json;
+
+namespace W1_assignment_template
 {
-    public class JsonFileHandler : DataManager,IFileHandler
+    public class JsonFileHandler : DataManager
     {
         public JsonFileHandler()
         {
             FileName = "Files/input.json";
         }
-        public void ReadToList(List<Character> characters)
+        public void ReadToList()
         {
 
         }
-        public void PrintList(List<Character> characters)
+        public void PrintList()
         {
 
         }
-        public void FindCharacter(List<Character> characters)
+        public void FindCharacter()
         {
 
         }
-        public void NewCharacter(List<Character> characters)
+        public void NewCharacter()
         {
 
         }
-        public void UpdateCharacter(List<Character> characters)
+        public void UpdateCharacter()
         {
 
         }
-        public void SaveToFile(List<Character> characters)
+        public void SaveToFile()
         {
 
         }
