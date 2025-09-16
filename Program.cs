@@ -16,7 +16,7 @@ class Program
         // Get the list of characters FileManager.cs
         //var characters = new Character();
         //characters.ReadCharactersToList();
-        var characters = new List<Character>();
+        IFileHandler characters = new JsonFileHandler;
         CharacterReader.ReadToList(characters);
 
         // Display the menu and prompt the user to enter an option

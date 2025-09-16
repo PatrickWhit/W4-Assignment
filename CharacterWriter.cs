@@ -1,6 +1,6 @@
 ﻿namespace W1_assignment_template
 {
-    internal class CharacterWriter
+    public class CharacterWriter
     {
         static public void NewCharacter(List<Character> characters) // writes a new character to the list
         {
