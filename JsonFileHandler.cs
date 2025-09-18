@@ -19,6 +19,7 @@ namespace W1_assignment_template
         {
             // Not sure if this writes to the Json file, or Just takes the characters and puts them into a string
             string json = JsonConvert.SerializeObject(Characters);
+            //File.AppendText(FileName, json);
         }
     }
 }
