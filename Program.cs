@@ -1,47 +1,58 @@
 ﻿using System.Reflection.Emit;
 using W1_assignment_template;
 
-class Program
+partial class Program
 {
-    static void DisplayMenu() // Displays the menu
-    {
-        Console.WriteLine("1. Display Characters");
-        Console.WriteLine("2. Add Character");
-        Console.WriteLine("3. Update Character");
-        Console.WriteLine("4. Find Character");
-    }
+    static IFileHandler fileHandler;
+    static List<Character> characters;
 
     static void Main()
     {
         // Get the list of characters FileManager.cs
-        IFileHandler characters = new CsvFileHandler();
-        //CharacterReader.ReadToList(characters);
-        characters.ReadToList();
+        fileHandler = new CsvFileHandler();
+        characters = fileHandler.ReadToList();
 
-        // Display the menu and prompt the user to enter an option
-        DisplayMenu();
-        Console.Write("\nChoose an option> ");
-        var userInput = Console.ReadLine();
+        bool isTrue = true;
+        while (isTrue)
+        {
+            // Display the menu and prompt the user to enter an option
+            DisplayMenu();
+            Console.Write("\nChoose an option> ");
+            var userInput = Console.ReadLine();
 
-        if (userInput == "1") // list the pre-existing characters
-        {
-            characters.PrintList();
+            if (userInput == "1") // list the pre-existing characters
+            {
+                CharacterHandler.ReadAllCharacters();
+            }
+            else if (userInput == "2") // Add a character to the list
+            {
+                CharacterHandler.AddCharacter();
+            }
+            else if (userInput == "3") // Update an existing character
+            {
+                CharacterHandler.LvlUpCharacter();
+            }
+            else if (userInput == "4") // Find a specific character
+            {
+                CharacterHandler.FindCharacter();
+            }
+            else if (userInput == "5")
+            {
+                fileHandler.SaveToFile();
+                isTrue = false;
+            }
+            else // if the user enters something other than 1, 2, or 3, then the program quits
+            {
+                Console.WriteLine("Invalid option selected");
+            }
         }
-        else if (userInput == "2") // Add a character to the list
-        {
-            characters.NewCharacter(); // call a class that adds a new character to the list
-        }
-        else if (userInput == "3") // Update an existing character
-        {
-            characters.UpdateCharacter();
-        }
-        else if (userInput == "4") // Find a specific character
-        {
-            characters.FindCharacter();
-        }
-        else // if the user enters something other than 1, 2, or 3, then the program quits
-        {
-            Console.WriteLine("Invalid option selected");
-        }
+    }
+    static void DisplayMenu() // Displays the menu
+    {
+        Console.WriteLine("\n\n1. Display Characters");
+        Console.WriteLine("2. Add Character");
+        Console.WriteLine("3. Update Character");
+        Console.WriteLine("4. Find Character");
+        Console.WriteLine("5. Save and Exit Application");
     }
 }

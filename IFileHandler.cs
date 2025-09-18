@@ -2,11 +2,7 @@
 {
     public interface IFileHandler
     {
-        void ReadToList();
-        void PrintList();
-        void FindCharacter();
-        void NewCharacter();
-        void UpdateCharacter();
+        List<Character> ReadToList();
         void SaveToFile();
     }
 }

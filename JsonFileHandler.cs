@@ -8,25 +8,11 @@ namespace W1_assignment_template
         {
             FileName = "Files/input.json";
         }
-        public void ReadToList()
+        public List<Character> ReadToList()
         {
 
-        }
-        public void PrintList()
-        {
 
-        }
-        public void FindCharacter()
-        {
-
-        }
-        public void NewCharacter()
-        {
-
-        }
-        public void UpdateCharacter()
-        {
-
+            return null;
         }
         public void SaveToFile()
         {
