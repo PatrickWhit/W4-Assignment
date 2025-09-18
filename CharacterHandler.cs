@@ -1,12 +1,10 @@
-﻿using W1_assignment_template;
-
-partial class Program
+﻿namespace W1_assignment_template
 {
-    public class CharacterHandler
+    public class CharacterHandler : DataManager
     {
         static public void ReadAllCharacters() // read all character from the list
         {
-            foreach (var c in characters)
+            foreach (var c in Characters)
             {
                 Console.WriteLine($"\nCharacter Name: {c.name}");
                 Console.WriteLine($"Character Class: {c.charClass}");
@@ -42,7 +40,7 @@ partial class Program
             Console.Write("Enter your character's equipment (separate items with a '|'): "); // give character a equipment
             newChar.equipment = Console.ReadLine();
 
-            characters.Add(newChar); // add the new character to the character list
+            Characters.Add(newChar); // add the new character to the character list
         }
 
         static public void FindCharacter() // finds a specific character based on the name entered
@@ -52,7 +50,7 @@ partial class Program
             Console.Write("\nType in the name of the character you wish to see> ");
             userInput = Console.ReadLine();
 
-            var selectedChar = characters.FirstOrDefault(c => c.name == userInput);
+            var selectedChar = Characters.FirstOrDefault(c => c.name == userInput);
 
             if (selectedChar != null)
             {
@@ -79,7 +77,7 @@ partial class Program
 
             Console.WriteLine("\nList of Characters: ");
 
-            foreach (var c in characters) // foreach loop lists the names of all the characters
+            foreach (var c in Characters) // foreach loop lists the names of all the characters
             {
                 Console.WriteLine($"\t{c.name}");
             }
@@ -87,7 +85,7 @@ partial class Program
             Console.Write("\nType in the name of the character you want to update> "); // user selects which character they want to update
             userInput = Console.ReadLine();
 
-            var selectedChar = characters.FirstOrDefault(c => c.name == userInput);
+            var selectedChar = Characters.FirstOrDefault(c => c.name == userInput);
 
             int updatedLvl = int.Parse(selectedChar.lvl) + 1; // store updated numbers in new variables
             int updatedHp = int.Parse(selectedChar.hp) + 6;

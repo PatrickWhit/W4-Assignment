@@ -1,12 +1,12 @@
 ﻿namespace W1_assignment_template
 {
-    public class CsvFileHandler : DataManager,IFileHandler
+    public class CsvFileHandler : DataManager, IFileHandler
     {
         public CsvFileHandler()
         {
             FileName = "Files/input.csv";
         }
-        public List<Character> ReadToList() // reads from input.csv
+        public void ReadToList() // reads from input.csv
         {
             using (StreamReader reader = new StreamReader("Files/input.csv"))
             {
@@ -52,8 +52,6 @@
                     line = reader.ReadLine();
                 }
             }
-
-            return Characters;
         }
 
         public void SaveToFile() // Saves all the charcaters in the list to input.csv

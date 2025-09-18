@@ -3,14 +3,11 @@ using W1_assignment_template;
 
 partial class Program
 {
-    static IFileHandler fileHandler;
-    static List<Character> characters;
-
     static void Main()
     {
         // Get the list of characters FileManager.cs
-        fileHandler = new CsvFileHandler();
-        characters = fileHandler.ReadToList();
+        IFileHandler fileHandler = new CsvFileHandler();
+        fileHandler.ReadToList();
 
         bool isTrue = true;
         while (isTrue)
