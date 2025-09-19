@@ -41,7 +41,7 @@
                     character.charClass = cols[1];
                     character.lvl = cols[2];
                     character.hp = cols[3];
-                    character.equipment = cols[4];
+                    character.equipment = cols[4].Split('|');
 
                     characters.Add(character);
 
@@ -85,7 +85,7 @@
                 Console.WriteLine($"Level: {selectedChar.lvl}");
                 Console.WriteLine($"Health: {selectedChar.hp}");
 
-                foreach (var e in selectedChar.equipment.Split('|'))
+                foreach (var e in selectedChar.equipment)
                 {
                     Console.WriteLine($"\t{e}");
                 }

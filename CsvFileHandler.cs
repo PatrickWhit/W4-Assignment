@@ -1,14 +1,16 @@
 ﻿namespace W1_assignment_template
 {
-    public class CsvFileHandler : DataManager, IFileHandler
+    public class CsvFileHandler : IFileHandler
     {
+        private string _fileName = "Files/input.csv";
         public CsvFileHandler()
         {
-            FileName = "Files/input.csv";
         }
-        public void ReadToList() // reads from input.csv
+        public List<Character> ReadToList() // reads from input.csv
         {
-            using (StreamReader reader = new StreamReader("Files/input.csv"))
+            List<Character> characters = new List<Character>();
+
+            using (StreamReader reader = new StreamReader(_fileName))
             {
                 reader.ReadLine(); // skips the header line
                 var line = reader.ReadLine();
@@ -45,24 +47,26 @@
                     character.charClass = cols[1];
                     character.lvl = cols[2];
                     character.hp = cols[3];
-                    character.equipment = cols[4];
+                    character.equipment = cols[4].Split('|').ToList();
 
-                    Characters.Add(character);
+                    characters.Add(character);
 
                     line = reader.ReadLine();
                 }
             }
+
+            return characters;
         }
 
-        public void SaveToFile() // Saves all the charcaters in the list to input.csv
+        public void SaveToFile(List<Character> characters) // Saves all the charcaters in the list to input.csv
         {
-            File.WriteAllText("Files\\input.csv", string.Empty); // delete all data in the file so it can be rewriten
+            File.WriteAllText(_fileName, string.Empty); // delete all data in the file so it can be rewriten
 
-            using (StreamWriter writer = new StreamWriter("Files\\input.csv", true)) // writes the header to input.csv
+            using (StreamWriter writer = new StreamWriter(_fileName, true)) // writes the header to input.csv
             {
                 writer.WriteLine("Name,Class,Level,HP,Equipment"); // write the header in first
 
-                foreach (var c in Characters)
+                foreach (var c in characters)
                 {
                     writer.WriteLine($"{c.name},{c.charClass},{c.lvl},{c.hp},{c.equipment}"); // then write in all characters
                 }

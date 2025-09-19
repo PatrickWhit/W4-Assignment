@@ -2,7 +2,20 @@
 {
     public class CharacterHandler : DataManager
     {
-        static public void ReadAllCharacters() // read all character from the list
+        public IFileHandler FileHandler { get; }
+
+        public CharacterHandler(IFileHandler fileHandler)
+        {
+            Characters = fileHandler.ReadToList();
+            FileHandler = fileHandler;
+        }
+
+        public void SaveCharacters(List<Character> characters)
+        {
+            FileHandler.SaveToFile(characters);
+        }
+
+        public void ReadAllCharacters() // read all character from the list
         {
             foreach (var c in Characters)
             {
@@ -12,7 +25,7 @@
                 Console.WriteLine($"Character Health: {c.hp}");
                 Console.WriteLine("Equipment:");
 
-                foreach (var e in c.equipment.Split('|'))
+                foreach (var e in c.equipment)
                 {
                     Console.WriteLine($"\t{e}");
                 }
@@ -21,7 +34,7 @@
             }
         }
 
-        static public void AddCharacter() // add a character to the character list
+        public void AddCharacter() // add a character to the character list
         {
             var newChar = new Character(); // initilization of new character
 
@@ -38,12 +51,12 @@
             newChar.hp = Console.ReadLine();
 
             Console.Write("Enter your character's equipment (separate items with a '|'): "); // give character a equipment
-            newChar.equipment = Console.ReadLine();
+            newChar.equipment.Add(Console.ReadLine());
 
             Characters.Add(newChar); // add the new character to the character list
         }
 
-        static public void FindCharacter() // finds a specific character based on the name entered
+        public void FindCharacter() // finds a specific character based on the name entered
         {
             string userInput = null;
 
@@ -60,7 +73,7 @@
                 Console.WriteLine($"Health: {selectedChar.hp}");
                 Console.WriteLine("Equipment:");
 
-                foreach (var e in selectedChar.equipment.Split('|'))
+                foreach (var e in selectedChar.equipment)
                 {
                     Console.WriteLine($"\t{e}");
                 }
@@ -71,7 +84,7 @@
             }
         }
 
-        static public void LvlUpCharacter() // add a level and health to a character
+        public void LvlUpCharacter() // add a level and health to a character
         {
             string userInput = null;
 

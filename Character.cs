@@ -13,12 +13,14 @@ namespace W1_assignment_template
         [JsonProperty("hp")]
         public string hp { get; set; }
         [JsonProperty("equipment")]
-        public string equipment { get; set; }
+        public List<string> equipment { get; set; }
 
 
-        public Character() { }
+        public Character() {
+            equipment = new List<string>();
+        }
 
-        public Character(string Name, string CharClass, string Lvl, string Hp, string Equipment)
+        public Character(string Name, string CharClass, string Lvl, string Hp, List<string> Equipment)
         {
             name = Name;
             charClass = CharClass;

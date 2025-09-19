@@ -5,9 +5,7 @@ partial class Program
 {
     static void Main()
     {
-        // Get the list of characters FileManager.cs
-        IFileHandler fileHandler = new CsvFileHandler();
-        fileHandler.ReadToList();
+        CharacterHandler handler = new CharacterHandler(new JsonFileHandler());
 
         bool isTrue = true;
         while (isTrue)
@@ -19,23 +17,23 @@ partial class Program
 
             if (userInput == "1") // list the pre-existing characters
             {
-                CharacterHandler.ReadAllCharacters();
+                handler.ReadAllCharacters();
             }
             else if (userInput == "2") // Add a character to the list
             {
-                CharacterHandler.AddCharacter();
+                handler.AddCharacter();
             }
             else if (userInput == "3") // Update an existing character
             {
-                CharacterHandler.LvlUpCharacter();
+                handler.LvlUpCharacter();
             }
             else if (userInput == "4") // Find a specific character
             {
-                CharacterHandler.FindCharacter();
+                handler.FindCharacter();
             }
             else if (userInput == "5")
             {
-                fileHandler.SaveToFile();
+                handler.SaveCharacters(handler.Characters);
                 isTrue = false;
             }
             else // if the user enters something other than 1, 2, or 3, then the program quits
